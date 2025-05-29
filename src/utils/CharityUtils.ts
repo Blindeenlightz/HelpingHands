@@ -1,3 +1,4 @@
+import { EditedCharityValues } from "@/components/EditCharityModal/EditCharityModal.types";
 import Charities from "@/constants/Charities";
 import { Donation } from "@/types/Donation";
 
@@ -44,6 +45,38 @@ export function addDonationToCharities(
     charity.amountRaised = formatCurrency(current + donation.amount);
 }
 
+/**
+ * Edit a charity in-place.
+ * Mutates the Charities array: updates fields of the matching charity.
+ *
+ * @param charityName - Unique name of the charity to update
+ * @param values - Edited charity values
+ * @throws Error if the charity is not found
+ */
+export function editCharityFromCharities(
+    charityName: string,
+    values: EditedCharityValues
+): void {
+    const charity = Charities.find((c) => c.name === charityName);
+    if (!charity) {
+        throw new Error(`Charity "${charityName}" not found`);
+    }
+
+    charity.name = values.name;
+    charity.description = values.description;
+    charity.email = values.email;
+    charity.phone = values.phone;
+    charity.imageUrl = values.imageUrl;
+    charity.targetAmount = values.targetAmount;
+}
+
+/**
+ * Remove a charity from the list in-place.
+ * Mutates the Charities array by removing the matching charity.
+ *
+ * @param charityName - Unique name of the charity to remove
+ * @throws Error if the charity is not found
+ */
 export function removeCharityFromCharities(charityName: string) {
     const index = Charities.findIndex((c) => c.name === charityName);
     if (index === -1) {

@@ -10,17 +10,24 @@ import { ThankYouModal } from "./ThankYouModal/ThankYouModal";
 import { Frequency } from "@/enums/Frequency";
 import { removeCharityFromCharities } from "@/utils/CharityUtils";
 import { DonorList } from "./DonorListModal/DonorListModal";
+import { EditCharityModal } from "./EditCharityModal/EditCharityModal";
 
 export const CharityList: React.FC = () => {
     const [donateOpen, setDonateOpen] = useState(false);
     const [thankYouOpen, setThankYouOpen] = useState(false);
     const [donorsOpen, setDonorsOpen] = useState(false);
+    const [editOpen, setEditOpen] = useState(false);
     const [currentCharity, setCurrentCharity] = useState<Charity | null>(null);
     const [charities, setCharities] = useState<Charity[]>([...Charities]);
 
     function handleRemoveCharity(name: string) {
         removeCharityFromCharities(name);
         setCharities([...charities]);
+    }
+
+    function handleEditCharity(charity: Charity) {
+        setCurrentCharity(charity);
+        setEditOpen(true);
     }
 
     function handleDonateClick(charity: Charity) {
@@ -87,6 +94,7 @@ export const CharityList: React.FC = () => {
                                 <button
                                     type="button"
                                     className="cursor-pointer p-2 rounded-md hover:text-gray-700 hover:bg-gray-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-1 focus:ring-offset-white"
+                                    onClick={() => handleEditCharity(charity)}
                                 >
                                     <PencilIcon
                                         className="h-6 w-6 text-gray-400"
@@ -133,10 +141,28 @@ export const CharityList: React.FC = () => {
                     }}
                 />
             )}
+
+            {currentCharity && (
+                <EditCharityModal
+                    open={editOpen}
+                    onClose={() => setEditOpen(false)}
+                    charity={currentCharity}
+                    initialValues={{
+                        name: currentCharity.name,
+                        description: currentCharity.description,
+                        email: currentCharity.email,
+                        phone: currentCharity.phone,
+                        targetAmount: currentCharity.targetAmount,
+                        imageUrl: currentCharity.imageUrl,
+                    }}
+                />
+            )}
+
             <ThankYouModal
                 open={thankYouOpen}
                 onClose={() => setThankYouOpen(false)}
             />
+
             {currentCharity && (
                 <DonorList
                     open={donorsOpen}

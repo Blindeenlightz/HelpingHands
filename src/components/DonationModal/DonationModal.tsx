@@ -2,8 +2,8 @@ import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { DonationModalProps, DonationValues } from "./DonationModal.types";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { FormEvent } from "react";
-import { NameInput } from "../NameInput/NameInput";
-import { AmountInput } from "../AmountInput/AmountInput";
+import { NameInput } from "../Inputs/NameInput/NameInput";
+import { AmountInput } from "../Inputs/AmountInput/AmountInput";
 import { RecurringSelection } from "../RecurringSelection/RecurringSelection";
 import { PaymentMethods } from "../PaymentMethods";
 import { useForm } from "@/utils/CommonHooks";
@@ -61,7 +61,7 @@ export const DonationModal: React.FC<DonationModalProps> = ({
 
                     <form onSubmit={handleSubmit} className="mt-4 space-y-6">
                         <NameInput
-                            name="donorName"
+                            name="name"
                             value={form.name}
                             onChange={handleChange}
                         />
