@@ -49,13 +49,13 @@ export const DonationModal: React.FC<DonationModalProps> = ({
                 <DialogPanel className="mx-auto max-w-md rounded bg-white p-6 shadow-lg">
                     <div className="flex items-center justify-between">
                         <DialogTitle className="text-lg font-medium text-gray-900">
-                            Donate to {charityName}
+                            {charityName}
                         </DialogTitle>
                         <button
                             onClick={handleModalClose}
                             className="cursor-pointer rounded p-1 text-gray-600 hover:text-gray-700"
                         >
-                            <XMarkIcon className="h-5 w-5" aria-hidden="true" />
+                            <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                         </button>
                     </div>
 

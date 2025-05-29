@@ -9,10 +9,12 @@ import { DonationModal } from "./DonationModal/DonationModal";
 import { ThankYouModal } from "./ThankYouModal/ThankYouModal";
 import { Frequency } from "@/enums/Frequency";
 import { removeCharityFromCharities } from "@/utils/CharityUtils";
+import { DonorList } from "./DonorListModal/DonorListModal";
 
 export const CharityList: React.FC = () => {
     const [donateOpen, setDonateOpen] = useState(false);
     const [thankYouOpen, setThankYouOpen] = useState(false);
+    const [donorsOpen, setDonorsOpen] = useState(false);
     const [currentCharity, setCurrentCharity] = useState<Charity | null>(null);
     const [charities, setCharities] = useState<Charity[]>([...Charities]);
 
@@ -24,6 +26,11 @@ export const CharityList: React.FC = () => {
     function handleDonateClick(charity: Charity) {
         setCurrentCharity(charity);
         setDonateOpen(true);
+    }
+
+    function handleDonorsClick(charity: Charity) {
+        setCurrentCharity(charity);
+        setDonorsOpen(true);
     }
 
     return (
@@ -70,6 +77,7 @@ export const CharityList: React.FC = () => {
                                 <button
                                     type="button"
                                     className="cursor-pointer p-2 rounded-md hover:text-gray-700 hover:bg-gray-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-1 focus:ring-offset-white"
+                                    onClick={() => handleDonorsClick(charity)}
                                 >
                                     <UserGroupIcon
                                         className="h-6 w-6 text-gray-400"
@@ -129,6 +137,13 @@ export const CharityList: React.FC = () => {
                 open={thankYouOpen}
                 onClose={() => setThankYouOpen(false)}
             />
+            {currentCharity && (
+                <DonorList
+                    open={donorsOpen}
+                    charity={currentCharity}
+                    onClose={() => setDonorsOpen(false)}
+                />
+            )}
         </>
     );
 };
