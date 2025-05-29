@@ -1,22 +1,29 @@
-import { Label, Listbox, ListboxButton, ListboxOption, ListboxOptions } from "@headlessui/react";
-import { useState } from "react";
+import {
+    Label,
+    Listbox,
+    ListboxButton,
+    ListboxOption,
+    ListboxOptions,
+} from "@headlessui/react";
 import { ChevronUpDownIcon } from "@heroicons/react/16/solid";
 import { CheckIcon } from "@heroicons/react/20/solid";
 import { frequencies } from "@/enums/Frequency";
+import { RecurringSelectionProps } from "./RecurringSelection.types";
 
-export const RecurringSelection: React.FC = () => {
-    const [selected, setSelected] = useState(frequencies[0]);
-
+export const RecurringSelection: React.FC<RecurringSelectionProps> = ({
+    value,
+    onChange,
+}) => {
     return (
-        <Listbox value={selected} onChange={setSelected}>
+        <Listbox value={value} onChange={onChange}>
             <Label className="block text-sm/6 font-medium text-gray-900">
                 Donation Frequency
             </Label>
 
             <div className="relative mt-2">
-                <ListboxButton className="cursor-pointer grid w-full cursor-default grid-cols-1 rounded-md bg-white py-1.5 pr-2 pl-3 text-left text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-rose-600 sm:text-sm/6">
+                <ListboxButton className="cursor-pointer grid w-full grid-cols-1 rounded-md bg-white py-1.5 pr-2 pl-3 text-left text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-rose-600 sm:text-sm/6">
                     <span className="col-start-1 row-start-1 truncate pr-6">
-                        {selected.name}
+                        {frequencies.find((f) => f.id === value)?.name || "Select…"}
                     </span>
                     <ChevronUpDownIcon
                         aria-hidden="true"
@@ -31,8 +38,8 @@ export const RecurringSelection: React.FC = () => {
                     {frequencies.map((freq) => (
                         <ListboxOption
                             key={freq.id}
-                            value={freq}
-                            className="cursor-pointer group relative cursor-default py-2 pr-9 pl-3 text-gray-900 select-none data-focus:bg-rose-600 data-focus:text-white data-focus:outline-hidden"
+                            value={freq.id}
+                            className="cursor-pointer group relative py-2 pr-9 pl-3 text-gray-900 select-none data-focus:bg-rose-600 data-focus:text-white data-focus:outline-hidden"
                         >
                             <span className="block truncate font-normal group-data-selected:font-semibold">
                                 {freq.name}

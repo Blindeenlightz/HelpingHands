@@ -1,20 +1,34 @@
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
-import { DonationModalProps } from "./DonationModal.types";
+import { DonationModalProps, DonationValues } from "./DonationModal.types";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { FormEvent } from "react";
-import { NameInput } from "../NameInput";
-import { AmountInput } from "../AmountInput";
-import { RecurringSelection } from "../RecurringSelection";
+import { NameInput } from "../NameInput/NameInput";
+import { AmountInput } from "../AmountInput/AmountInput";
+import { RecurringSelection } from "../RecurringSelection/RecurringSelection";
 import { PaymentMethods } from "../PaymentMethods";
+import { useForm } from "@/utils/CommonHooks";
+import { Frequency } from "@/enums/Frequency";
+import { addDonationToCharities } from "@/utils/CharityUtils";
 
 export const DonationModal: React.FC<DonationModalProps> = ({
     open,
     onClose,
     onSuccess,
-    charity,
+    charityName,
+    initialValues,
 }) => {
+    const { form, handleChange, setForm } =
+        useForm<DonationValues>(initialValues);
+
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
+        const newDonation: Donation = {
+            donorName: form.name,
+            amount: Number(form.amount),
+            frequency: form.frequency,
+            date: new Date().toISOString(),
+        };
+        addDonationToCharities(charityName, newDonation)
         onClose();
         onSuccess();
     }
@@ -27,7 +41,7 @@ export const DonationModal: React.FC<DonationModalProps> = ({
                 <DialogPanel className="mx-auto max-w-md rounded bg-white p-6 shadow-lg">
                     <div className="flex items-center justify-between">
                         <DialogTitle className="text-lg font-medium text-gray-900">
-                            Donate to {charity.name}
+                            Donate to {charityName}
                         </DialogTitle>
                         <button
                             onClick={onClose}
@@ -38,9 +52,22 @@ export const DonationModal: React.FC<DonationModalProps> = ({
                     </div>
 
                     <form onSubmit={handleSubmit} className="mt-4 space-y-6">
-                        <NameInput />
-                        <AmountInput />
-                        <RecurringSelection />
+                        <NameInput
+                            name="donorName"
+                            value={form.name}
+                            onChange={handleChange}
+                        />
+                        <AmountInput
+                            name="amount"
+                            value={form.amount}
+                            onChange={handleChange}
+                        />
+                        <RecurringSelection
+                            value={form.frequency}
+                            onChange={(freq: Frequency) =>
+                                setForm((f) => ({ ...f, frequency: freq }))
+                            }
+                        />
                         <PaymentMethods />
 
                         <button

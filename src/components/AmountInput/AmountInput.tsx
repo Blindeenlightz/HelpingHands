@@ -1,4 +1,10 @@
-export const AmountInput: React.FC = () => {
+import { AmountInputProps } from "./AmountInput.types";
+
+export const AmountInput: React.FC<AmountInputProps> = ({
+    name,
+    value,
+    onChange,
+}) => {
     return (
         <div>
             <label
@@ -13,10 +19,13 @@ export const AmountInput: React.FC = () => {
                         $
                     </div>
                     <input
-                        id="price"
-                        name="price"
+                        id={name}
+                        name={name}
+                        value={value}
                         type="text"
+                        onChange={onChange}
                         placeholder="0.00"
+                        required
                         aria-describedby="price-currency"
                         className="block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
                     />

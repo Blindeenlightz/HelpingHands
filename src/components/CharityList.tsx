@@ -3,10 +3,11 @@ import Image from "next/image";
 import { UserGroupIcon, PencilIcon } from "@heroicons/react/20/solid";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { Charity } from "@/types/Charity";
-import { Charities } from "@/constants/Charities";
+import Charities from "@/constants/Charities";
 import { ProgressBar } from "./ProgressBar/ProgressBar";
 import { DonationModal } from "./DonationModal/DonationModal";
 import { ThankYouModal } from "./ThankYouModal/ThankYouModal";
+import { Frequency } from "@/enums/Frequency";
 
 export const CharityList: React.FC = () => {
     const [donateOpen, setDonateOpen] = useState(false);
@@ -106,7 +107,12 @@ export const CharityList: React.FC = () => {
                     open={donateOpen}
                     onClose={() => setDonateOpen(false)}
                     onSuccess={() => setThankYouOpen(true)}
-                    charity={{ name: currentCharity.name }}
+                    charityName={currentCharity.name }
+                    initialValues={{
+                        name: "Anonymous",
+                        amount: "",
+                        frequency: Frequency.OneTime
+                    }}
                 />
             )}
             <ThankYouModal
