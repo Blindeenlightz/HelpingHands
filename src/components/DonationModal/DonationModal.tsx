@@ -29,13 +29,20 @@ export const DonationModal: React.FC<DonationModalProps> = ({
             frequency: form.frequency,
             date: new Date().toISOString(),
         };
-        addDonationToCharities(charityName, newDonation)
+        addDonationToCharities(charityName, newDonation);
+        setForm(initialValues);
+
         onClose();
         onSuccess();
     }
 
+    function handleModalClose() {
+        setForm(initialValues);
+        onClose();
+    }
+
     return (
-        <Dialog open={open} onClose={onClose} className="fixed inset-0 z-50">
+        <Dialog open={open} onClose={handleModalClose} className="fixed inset-0 z-50">
             <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
 
             <div className="fixed inset-0 flex items-center justify-center p-4">
@@ -45,7 +52,7 @@ export const DonationModal: React.FC<DonationModalProps> = ({
                             Donate to {charityName}
                         </DialogTitle>
                         <button
-                            onClick={onClose}
+                            onClick={handleModalClose}
                             className="cursor-pointer rounded p-1 text-gray-600 hover:text-gray-700"
                         >
                             <XMarkIcon className="h-5 w-5" aria-hidden="true" />
