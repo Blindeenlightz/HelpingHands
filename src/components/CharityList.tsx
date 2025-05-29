@@ -8,11 +8,18 @@ import { ProgressBar } from "./ProgressBar/ProgressBar";
 import { DonationModal } from "./DonationModal/DonationModal";
 import { ThankYouModal } from "./ThankYouModal/ThankYouModal";
 import { Frequency } from "@/enums/Frequency";
+import { removeCharityFromCharities } from "@/utils/CharityUtils";
 
 export const CharityList: React.FC = () => {
     const [donateOpen, setDonateOpen] = useState(false);
     const [thankYouOpen, setThankYouOpen] = useState(false);
     const [currentCharity, setCurrentCharity] = useState<Charity | null>(null);
+    const [charities, setCharities] = useState<Charity[]>([...Charities]);
+
+    function handleRemoveCharity(name: string) {
+        removeCharityFromCharities(name);
+        setCharities([...charities]);
+    }
 
     function handleDonateClick(charity: Charity) {
         setCurrentCharity(charity);
@@ -81,6 +88,9 @@ export const CharityList: React.FC = () => {
                                 <button
                                     type="button"
                                     className="cursor-pointer p-2 rounded-md hover:text-rose-700 hover:bg-rose-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-1 focus:ring-offset-white"
+                                    onClick={() =>
+                                        handleRemoveCharity(charity.name)
+                                    }
                                 >
                                     <TrashIcon
                                         className="h-6 w-6 text-rose-600"
@@ -107,11 +117,11 @@ export const CharityList: React.FC = () => {
                     open={donateOpen}
                     onClose={() => setDonateOpen(false)}
                     onSuccess={() => setThankYouOpen(true)}
-                    charityName={currentCharity.name }
+                    charityName={currentCharity.name}
                     initialValues={{
                         name: "Anonymous",
                         amount: "",
-                        frequency: Frequency.OneTime
+                        frequency: Frequency.OneTime,
                     }}
                 />
             )}

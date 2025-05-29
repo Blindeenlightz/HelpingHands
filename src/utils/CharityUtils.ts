@@ -43,3 +43,11 @@ export function addDonationToCharities(
     const current = parseCurrency(charity.amountRaised);
     charity.amountRaised = formatCurrency(current + donation.amount);
 }
+
+export function removeCharityFromCharities(charityName: string) {
+    const index = Charities.findIndex((c) => c.name === charityName);
+    if (index === -1) {
+        throw new Error(`Charity \"${charityName}\" not found`);
+    }
+    Charities.splice(index, 1);
+}
