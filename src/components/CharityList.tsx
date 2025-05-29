@@ -1,0 +1,118 @@
+import { useState } from "react";
+import Image from "next/image";
+import { UserGroupIcon, PencilIcon } from "@heroicons/react/20/solid";
+import { TrashIcon } from "@heroicons/react/24/outline";
+import { Charity } from "@/types/Charity";
+import { Charities } from "@/constants/Charities";
+import { ProgressBar } from "./ProgressBar/ProgressBar";
+import { DonationModal } from "./DonationModal/DonationModal";
+import { ThankYouModal } from "./ThankYouModal/ThankYouModal";
+
+export const CharityList: React.FC = () => {
+    const [donateOpen, setDonateOpen] = useState(false);
+    const [thankYouOpen, setThankYouOpen] = useState(false);
+    const [currentCharity, setCurrentCharity] = useState<Charity | null>(null);
+
+    function handleDonateClick(charity: Charity) {
+        setCurrentCharity(charity);
+        setDonateOpen(true);
+    }
+
+    return (
+        <>
+            <ul
+                role="list"
+                className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+            >
+                {Charities.map((charity) => (
+                    <li
+                        key={charity.email}
+                        className="bg-[var(--color-cardBackground)] border border-gray-500/50 shadow-lg hover:shadow-xl hover:scale-[1.03] transform col-span-1 flex flex-col divide-y divide-gray-200 rounded-xl text-center"
+                    >
+                        <div className="flex flex-1 flex-col p-8 justify-between">
+                            <div>
+                                <div className="relative w-full aspect-square">
+                                    <Image
+                                        alt={charity.name}
+                                        src={charity.imageUrl}
+                                        fill
+                                        className="object-cover rounded-lg"
+                                        sizes="100vw"
+                                        priority
+                                    />
+                                </div>
+                                <h3 className="mt-6 text-m font-bold text-primary">
+                                    {charity.name}
+                                </h3>
+                                <p className="mt-1 text-sm text-primary">
+                                    {charity.description}
+                                </p>
+                            </div>
+
+                            <div className="mt-4">
+                                <ProgressBar
+                                    amountRaised={charity.amountRaised}
+                                    targetAmount={charity.targetAmount}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="flex items-center justify-between px-6 py-4 border-t border-gray-200 dark:border-gray-700">
+                            <div className="flex space-x-2">
+                                <button
+                                    type="button"
+                                    className="cursor-pointer p-2 rounded-md hover:text-gray-700 hover:bg-gray-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-1 focus:ring-offset-white"
+                                >
+                                    <UserGroupIcon
+                                        className="h-6 w-6 text-gray-400"
+                                        aria-hidden="true"
+                                    />
+                                </button>
+                                <button
+                                    type="button"
+                                    className="cursor-pointer p-2 rounded-md hover:text-gray-700 hover:bg-gray-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-1 focus:ring-offset-white"
+                                >
+                                    <PencilIcon
+                                        className="h-6 w-6 text-gray-400"
+                                        aria-hidden="true"
+                                    />
+                                </button>
+                                <button
+                                    type="button"
+                                    className="cursor-pointer p-2 rounded-md hover:text-rose-700 hover:bg-rose-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-1 focus:ring-offset-white"
+                                >
+                                    <TrashIcon
+                                        className="h-6 w-6 text-rose-600"
+                                        aria-hidden="true"
+                                    />
+                                </button>
+                            </div>
+
+                            <div className="w-1/3">
+                                <button
+                                    onClick={() => handleDonateClick(charity)}
+                                    className="cursor-pointer w-full px-4 py-2 rounded-lg text-sm font-medium bg-rose-500 hover:bg-rose-600 text-white transition-all duration-200 shadow-sm hover:shadow-md transform hover:-translate-y-px focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 focus:ring-offset-white"
+                                >
+                                    Donate
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                ))}
+            </ul>
+
+            {currentCharity && (
+                <DonationModal
+                    open={donateOpen}
+                    onClose={() => setDonateOpen(false)}
+                    onSuccess={() => setThankYouOpen(true)}
+                    charity={{ name: currentCharity.name }}
+                />
+            )}
+            <ThankYouModal
+                open={thankYouOpen}
+                onClose={() => setThankYouOpen(false)}
+            />
+        </>
+    );
+};
