@@ -9,6 +9,7 @@ import { PaymentMethods } from "../PaymentMethods";
 import { useForm } from "@/utils/CommonHooks";
 import { Frequency } from "@/enums/Frequency";
 import { addDonationToCharities } from "@/utils/CharityUtils";
+import { Donation } from "@/types/Donation";
 
 export const DonationModal: React.FC<DonationModalProps> = ({
     open,
