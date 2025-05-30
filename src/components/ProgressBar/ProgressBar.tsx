@@ -12,7 +12,10 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
     return (
         <div className="w-full">
             <div className="flex justify-between text-sm font-medium text-primary mb-1">
-                <span>{`Raised: `} <span className="text-rose-400">{`$${raisedNum.toLocaleString()}`}</span></span>
+                <span>
+                    {`Raised: `}{" "}
+                    <span className="text-rose-400">{`$${raisedNum.toLocaleString()}`}</span>
+                </span>
                 <span>{`Goal: $${targetNum.toLocaleString()}`}</span>
             </div>
 

@@ -18,7 +18,6 @@ export function CharityImageInput({
     defaultImage,
     onChange,
 }: CharityImageInputProps) {
-    // Choose preview: controlled by `value`, fallback to `defaultImage`
     const previewSrc = value || defaultImage;
 
     return (

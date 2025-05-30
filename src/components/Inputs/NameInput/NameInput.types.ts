@@ -1,5 +1,5 @@
 export interface NameInputProps {
-    name: string,
-    value: string, 
+    name: string;
+    value: string;
     onChange: React.ChangeEventHandler<HTMLInputElement>;
 }

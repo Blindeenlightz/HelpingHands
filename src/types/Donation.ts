@@ -1,4 +1,4 @@
-import { Frequency } from '@/enums/Frequency';
+import { Frequency } from "@/enums/Frequency";
 
 export type Donation = {
     donorName: string;

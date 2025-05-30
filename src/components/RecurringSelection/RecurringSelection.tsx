@@ -23,7 +23,8 @@ export const RecurringSelection: React.FC<RecurringSelectionProps> = ({
             <div className="relative mt-2">
                 <ListboxButton className="cursor-pointer grid w-full grid-cols-1 rounded-md bg-white py-1.5 pr-2 pl-3 text-left text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-rose-600 sm:text-sm/6">
                     <span className="col-start-1 row-start-1 truncate pr-6">
-                        {frequencies.find((f) => f.id === value)?.name || "Select…"}
+                        {frequencies.find((f) => f.id === value)?.name ||
+                            "Select…"}
                     </span>
                     <ChevronUpDownIcon
                         aria-hidden="true"

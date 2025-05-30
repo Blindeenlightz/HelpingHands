@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
 
-
 const ThemeSwitcher = () => {
     const [mounted, setMounted] = useState(false);
     const { theme, setTheme } = useTheme();
@@ -12,7 +11,7 @@ const ThemeSwitcher = () => {
     const toggleTheme = () => {
         setTheme(theme === "light" ? "dark" : "light");
     };
-    
+
     useEffect(() => {
         setMounted(true);
     }, []);

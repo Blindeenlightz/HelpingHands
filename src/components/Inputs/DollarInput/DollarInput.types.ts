@@ -1,7 +1,7 @@
 export interface DollarInputProps {
-  name: string;
-  value: string;
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
-  label?: string;
-  placeholder?: string;
+    name: string;
+    value: string;
+    onChange: React.ChangeEventHandler<HTMLInputElement>;
+    label?: string;
+    placeholder?: string;
 }

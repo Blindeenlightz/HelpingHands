@@ -1,15 +1,10 @@
 import React from "react";
 
 export interface DollarInputProps {
-    /** Field name and id */
     name: string;
-    /** Controlled input value (with or without leading '$' and commas) */
     value: string;
-    /** Change handler from parent form */
     onChange: React.ChangeEventHandler<HTMLInputElement>;
-    /** Optional label text */
     label?: string;
-    /** Optional placeholder (e.g. "0.00") */
     placeholder?: string;
 }
 

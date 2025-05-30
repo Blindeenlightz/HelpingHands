@@ -1,7 +1,10 @@
 import { NameInputProps } from "./NameInput.types";
 
-export const NameInput: React.FC<NameInputProps> = ({name, value, onChange}) => {
-    
+export const NameInput: React.FC<NameInputProps> = ({
+    name,
+    value,
+    onChange,
+}) => {
     return (
         <div className="relative">
             <label
