@@ -4,7 +4,7 @@
 
 This project showcases reusable component architecture, responsive design, local data persistence, and dark/light theme support. Ideal for recruiters and clients looking to see practical, clean, modern React-based development.
 
-[🌐 Live Demo](https://your-demo-link.com)
+<a href="https://your-demo-link.com" target="_blank" rel="noopener noreferrer">🌐 Live Demo</a>
 
 ------
 
@@ -88,5 +88,5 @@ Dark/light mode can be toggled in the UI.
 
 ## 📬 Contact
 
-Created by [Jamie Braaksma](https://jamiebraaksma.dev)
- Feel free to reach out on [LinkedIn](https://www.linkedin.com/in/jamie-braaksma-b32273223) or explore more on [GitHub](https://github.com/Blindeenlightz)
+Created by <a href="https://jamiebraaksma.dev" target="_blank" rel="noopener noreferrer">Jamie Braaksma</a>
+ Feel free to reach out on <a href="https://www.linkedin.com/in/jamie-braaksma-b32273223" target="_blank" rel="noopener noreferrer">LinkedIn</a> or explore more on <a href="https://github.com/Blindeenlightz" target="_blank" rel="noopener noreferrer">GitHub</a>
