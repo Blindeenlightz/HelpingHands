@@ -1,6 +1,6 @@
-export interface CharityImagePickerProps {
+export interface CharityImageInputProps {
     name: string;
     value: string;
-    defaultImage : string;
+    defaultImage? : string;
     onChange: React.ChangeEventHandler<HTMLInputElement>;
 }

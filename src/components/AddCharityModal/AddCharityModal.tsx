@@ -1,59 +1,44 @@
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import {
-    EditCharityModalProps,
-    EditedCharityValues,
-} from "./EditCharityModal.types";
+import { AddCharityModalProps } from "./AddCharityModal.types";
 import { useForm } from "@/utils/CommonHooks";
-import { FormEvent, useEffect } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { CharityImageInput } from "../Inputs/CharityImageInput/CharityImageInput";
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { DollarInput } from "../Inputs/DollarInput/DollarInput";
+import { Charity } from "@/types/Charity";
 
-export const EditCharityModal: React.FC<EditCharityModalProps> = ({
+export const AddCharityModal: React.FC<AddCharityModalProps> = ({
     open,
-    charity,
     onClose,
     initialValues,
     charities,
     setCharities,
 }) => {
-    const { form, handleChange, setForm } =
-        useForm<EditedCharityValues>(initialValues);
+    const { form, handleChange, setForm } = useForm<Charity>(initialValues);
 
     useEffect(() => {
-        if (open) setForm(initialValues);
+        if (open) {
+            setForm(initialValues);
+            setNameError(false);
+        }
     }, [open, initialValues, setForm]);
+
+    const [nameError, setNameError] = useState(false);
 
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
-        const editedCharity: EditedCharityValues = {
+        const newCharity: Charity = {
             name: form.name,
             description: form.description,
             email: form.email,
             phone: form.phone,
             targetAmount: form.targetAmount,
             imageUrl: form.imageUrl,
+            amountRaised: "$0",
+            donations: [],
         };
-        editTargetCharity(charity.name, editedCharity);
-        setCharities([...charities]);
+        setCharities((prev) => [...prev, newCharity]);
         onClose();
-    }
-
-    function editTargetCharity(
-        charityName: string,
-        values: EditedCharityValues
-    ) {
-        const charity = charities.find((c) => c.name === charityName);
-        if (!charity) {
-            throw new Error(`Charity "${charityName}" not found`);
-        }
-
-        charity.name = values.name;
-        charity.description = values.description;
-        charity.email = values.email;
-        charity.phone = values.phone;
-        charity.imageUrl = values.imageUrl;
-        charity.targetAmount = values.targetAmount;
     }
 
     function handleModalClose() {
@@ -67,6 +52,15 @@ export const EditCharityModal: React.FC<EditCharityModalProps> = ({
         setForm((f) => ({ ...f, imageUrl: url }));
     }
 
+    function handleNameChange(e: React.ChangeEvent<HTMLInputElement>) {
+        if (charities.some((charity) => charity.name === e.target.value)) {
+            setNameError(true);
+        } else {
+            setNameError(false);
+            setForm((f) => ({ ...f, name: e.target.value }));
+        }
+    }
+
     return (
         <Dialog
             open={open}
@@ -78,7 +72,7 @@ export const EditCharityModal: React.FC<EditCharityModalProps> = ({
             <DialogPanel className="relative mx-auto w-full max-w-md max-h-[90vh] overflow-y-auto rounded bg-white p-6 shadow-lg">
                 <div className="flex items-center justify-between">
                     <DialogTitle className="text-lg font-medium text-gray-900">
-                        Edit Charity
+                        Add New Charity
                     </DialogTitle>
                     <button
                         onClick={handleModalClose}
@@ -105,10 +99,19 @@ export const EditCharityModal: React.FC<EditCharityModalProps> = ({
                                             name="name"
                                             type="text"
                                             value={form.name}
-                                            onChange={handleChange}
-                                            className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-rose-600 sm:text-sm/6"
+                                            onChange={handleNameChange}
+                                            className={`block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-rose-600 sm:text-sm ${
+                                                nameError
+                                                    ? "border border-red-500 focus:ring-red-500"
+                                                    : ""
+                                            }`}
                                             required
                                         />
+                                        {nameError && (
+                                            <p className="mt-1 text-sm text-red-600">
+                                                That name is already taken.
+                                            </p>
+                                        )}
                                     </div>
                                 </div>
                                 <div className="col-span-full">
@@ -183,7 +186,6 @@ export const EditCharityModal: React.FC<EditCharityModalProps> = ({
                                     <CharityImageInput
                                         name="imageUrl"
                                         value={form.imageUrl}
-                                        defaultImage={initialValues.imageUrl}
                                         onChange={handleImageChange}
                                     />
                                 </div>
@@ -203,7 +205,7 @@ export const EditCharityModal: React.FC<EditCharityModalProps> = ({
                             type="submit"
                             className="cursor-pointer px-4 py-2 rounded-lg text-sm font-medium bg-rose-500 hover:bg-rose-600 text-white transition-all duration-200 shadow-sm hover:shadow-md transform hover:-translate-y-px focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 focus:ring-offset-white"
                         >
-                            Save
+                            Create
                         </button>
                     </div>
                 </form>

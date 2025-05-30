@@ -3,25 +3,30 @@ import Image from "next/image";
 import { UserGroupIcon, PencilIcon } from "@heroicons/react/20/solid";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { Charity } from "@/types/Charity";
-import Charities from "@/constants/Charities";
-import { ProgressBar } from "./ProgressBar/ProgressBar";
-import { DonationModal } from "./DonationModal/DonationModal";
-import { ThankYouModal } from "./ThankYouModal/ThankYouModal";
+import { ProgressBar } from "../ProgressBar/ProgressBar";
+import { DonationModal } from "../DonationModal/DonationModal";
+import { ThankYouModal } from "../ThankYouModal/ThankYouModal";
 import { Frequency } from "@/enums/Frequency";
-import { removeCharityFromCharities } from "@/utils/CharityUtils";
-import { DonorList } from "./DonorListModal/DonorListModal";
-import { EditCharityModal } from "./EditCharityModal/EditCharityModal";
+import { DonorList } from "../DonorListModal/DonorListModal";
+import { EditCharityModal } from "../EditCharityModal/EditCharityModal";
+import { CharityListProps } from "./CharityList.types";
 
-export const CharityList: React.FC = () => {
+export const CharityList: React.FC<CharityListProps> = ({
+    charities,
+    setCharities,
+}) => {
     const [donateOpen, setDonateOpen] = useState(false);
     const [thankYouOpen, setThankYouOpen] = useState(false);
     const [donorsOpen, setDonorsOpen] = useState(false);
     const [editOpen, setEditOpen] = useState(false);
     const [currentCharity, setCurrentCharity] = useState<Charity | null>(null);
-    const [charities, setCharities] = useState<Charity[]>([...Charities]);
 
     function handleRemoveCharity(name: string) {
-        removeCharityFromCharities(name);
+        const index = charities.findIndex((c) => c.name === name);
+        if (index === -1) {
+            throw new Error(`Charity \"${name}\" not found`);
+        }
+        charities.splice(index, 1);
         setCharities([...charities]);
     }
 
@@ -46,7 +51,7 @@ export const CharityList: React.FC = () => {
                 role="list"
                 className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
             >
-                {Charities.map((charity) => (
+                {charities.map((charity) => (
                     <li
                         key={charity.email}
                         className="bg-[var(--color-cardBackground)] border border-gray-500/50 shadow-lg hover:shadow-xl hover:scale-[1.03] transform col-span-1 flex flex-col divide-y divide-gray-200 rounded-xl text-center"
@@ -134,6 +139,8 @@ export const CharityList: React.FC = () => {
                     onClose={() => setDonateOpen(false)}
                     onSuccess={() => setThankYouOpen(true)}
                     charityName={currentCharity.name}
+                    charities={charities}
+                    setCharities={setCharities}
                     initialValues={{
                         name: "Anonymous",
                         amount: "",
@@ -147,6 +154,8 @@ export const CharityList: React.FC = () => {
                     open={editOpen}
                     onClose={() => setEditOpen(false)}
                     charity={currentCharity}
+                    charities={charities}
+                    setCharities={setCharities}
                     initialValues={{
                         name: currentCharity.name,
                         description: currentCharity.description,

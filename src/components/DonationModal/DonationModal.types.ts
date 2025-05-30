@@ -1,4 +1,6 @@
 import { Frequency } from "@/enums/Frequency";
+import { Charity } from "@/types/Charity";
+import { Dispatch, SetStateAction } from "react";
 
 export interface DonationModalProps {
     open: boolean;
@@ -6,6 +8,8 @@ export interface DonationModalProps {
     onSuccess: () => void;
     charityName: string;
     initialValues: DonationValues;
+    charities: Charity[];
+    setCharities: Dispatch<SetStateAction<Charity[]>>;
 }
 export interface DonationValues {
     name: string;

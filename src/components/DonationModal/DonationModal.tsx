@@ -5,11 +5,11 @@ import { FormEvent } from "react";
 import { NameInput } from "../Inputs/NameInput/NameInput";
 import { AmountInput } from "../Inputs/AmountInput/AmountInput";
 import { RecurringSelection } from "../RecurringSelection/RecurringSelection";
-import { PaymentMethods } from "../PaymentMethods";
+import { PaymentMethods } from "../PaymentMethods/PaymentMethods";
 import { useForm } from "@/utils/CommonHooks";
 import { Frequency } from "@/enums/Frequency";
-import { addDonationToCharities } from "@/utils/CharityUtils";
 import { Donation } from "@/types/Donation";
+import { parseCurrency, formatCurrency } from "@/utils/CharityUtils";
 
 export const DonationModal: React.FC<DonationModalProps> = ({
     open,
@@ -17,6 +17,8 @@ export const DonationModal: React.FC<DonationModalProps> = ({
     onSuccess,
     charityName,
     initialValues,
+    charities,
+    setCharities,
 }) => {
     const { form, handleChange, setForm } =
         useForm<DonationValues>(initialValues);
@@ -31,9 +33,26 @@ export const DonationModal: React.FC<DonationModalProps> = ({
         };
         addDonationToCharities(charityName, newDonation);
         setForm(initialValues);
-
+        setCharities([...charities]);
         onClose();
         onSuccess();
+    }
+
+    function addDonationToCharities(
+        charityName: string,
+        donation: Donation
+    ): void {
+        const charity = charities.find((c) => c.name === charityName);
+        if (!charity) {
+            throw new Error(`Charity \"${charityName}\" not found`);
+        }
+
+        // Append new donation
+        charity.donations.push(donation);
+
+        // Update amountRaised
+        const current = parseCurrency(charity.amountRaised);
+        charity.amountRaised = formatCurrency(current + donation.amount);
     }
 
     function handleModalClose() {
@@ -42,7 +61,11 @@ export const DonationModal: React.FC<DonationModalProps> = ({
     }
 
     return (
-        <Dialog open={open} onClose={handleModalClose} className="fixed inset-0 z-50">
+        <Dialog
+            open={open}
+            onClose={handleModalClose}
+            className="fixed inset-0 z-50"
+        >
             <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
 
             <div className="fixed inset-0 flex items-center justify-center p-4">

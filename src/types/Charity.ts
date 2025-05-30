@@ -5,8 +5,8 @@ export interface Charity {
     description: string;
     email: string;
     phone: string;
-    amountRaised: string;
     targetAmount: string;
     imageUrl: string;
+    amountRaised: string;
     donations: Donation[];
 }
