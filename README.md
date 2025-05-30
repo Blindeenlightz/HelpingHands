@@ -4,7 +4,7 @@
 
 This project showcases reusable component architecture, responsive design, local data persistence, and dark/light theme support. Ideal for recruiters and clients looking to see practical, clean, modern React-based development.
 
-<a href="https://your-demo-link.com" target="_blank" rel="noopener noreferrer">🌐 Live Demo</a>
+<a href="https://reactdemohelpinghands.netlify.app/" target="_blank" rel="noopener noreferrer">🌐 Live Demo</a>
 
 ------
 
@@ -35,8 +35,6 @@ This project showcases reusable component architecture, responsive design, local
 src/
 ├── app/                # App Router structure (layout.tsx, page.tsx, etc.)
 ├── components/         # Reusable UI components (buttons, modals, cards, etc.)
-├── styles/             # Tailwind config and global styles
-├── types/              # TypeScript interfaces and type definitions
 ├── utils/              # Utility functions (e.g. localStorage helpers)
 ```
 
