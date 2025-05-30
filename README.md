@@ -46,8 +46,8 @@ src/
 
 ```
 bashCopyEdit# Clone the repo
-git clone https://github.com/your-username/helping-hands.git
-cd helping-hands
+git clone https://github.com/blindeenlightz/HelpingHands.git
+cd HelpingHands
 
 # Install dependencies
 npm install
