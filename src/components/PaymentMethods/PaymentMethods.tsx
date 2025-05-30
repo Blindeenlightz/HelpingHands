@@ -1,12 +1,12 @@
 export const PaymentMethods: React.FC = () => {
     return (
-        <div className="bg-white shadow-sm sm:rounded-lg">
+        <div className="bg-background shadow-sm sm:rounded-lg">
             <div className="px-4 py-5 sm:p-6">
-                <h3 className="text-base font-semibold text-gray-900">
+                <h3 className="text-base font-semibold">
                     Payment method
                 </h3>
                 <div className="mt-5">
-                    <div className="rounded-md bg-gray-50 px-6 py-5 sm:flex sm:items-start sm:justify-between">
+                    <div className=" rounded-md px-6 py-5 sm:flex sm:items-start sm:justify-between">
                         <h4 className="sr-only">Visa</h4>
                         <div className="sm:flex sm:items-start">
                             <svg
@@ -26,10 +26,10 @@ export const PaymentMethods: React.FC = () => {
                                 />
                             </svg>
                             <div className="mt-3 sm:mt-0 sm:ml-4">
-                                <div className="text-sm font-medium text-gray-900">
+                                <div className="text-sm font-medium">
                                     Ending with 4242
                                 </div>
-                                <div className="mt-1 text-sm text-gray-600 sm:flex sm:items-center">
+                                <div className="mt-1 text-sm sm:flex sm:items-center">
                                     <div>Expires 12/20</div>
                                     <span
                                         aria-hidden="true"

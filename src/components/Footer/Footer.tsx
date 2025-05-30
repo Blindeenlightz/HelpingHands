@@ -96,7 +96,6 @@ export const Footer: React.FC = () => {
                         <a
                             key={item.name}
                             href={item.href}
-                            className="text-gray-600 hover:text-gray-900"
                         >
                             {item.name}
                         </a>
@@ -106,15 +105,13 @@ export const Footer: React.FC = () => {
                     {navigation.social.map((item) => (
                         <a
                             key={item.name}
-                            href={item.href}
-                            className="text-gray-600 hover:text-gray-800"
-                        >
+                            href={item.href}                        >
                             <span className="sr-only">{item.name}</span>
                             <item.icon aria-hidden="true" className="size-6" />
                         </a>
                     ))}
                 </div>
-                <p className="mt-10 text-center text-sm/6 text-gray-600">
+                <p className="mt-10 text-center text-sm/6">
                     &copy; 2024 Helping Hands, Inc. All rights reserved.
                 </p>
             </div>

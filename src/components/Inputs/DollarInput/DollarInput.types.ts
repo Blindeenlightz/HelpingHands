@@ -4,4 +4,5 @@ export interface DollarInputProps {
     onChange: React.ChangeEventHandler<HTMLInputElement>;
     label?: string;
     placeholder?: string;
+    currency?: string;
 }

@@ -88,7 +88,7 @@ export const CharityList: React.FC<CharityListProps> = ({
                             <div className="flex space-x-2">
                                 <button
                                     type="button"
-                                    className="cursor-pointer p-2 rounded-md hover:text-gray-700 hover:bg-gray-50 transition-colors duration-200"
+                                    className="cursor-pointer p-2 rounded-md  hover:bg-gray-50 transition-colors duration-200"
                                     onClick={() => handleDonorsClick(charity)}
                                 >
                                     <UserGroupIcon
@@ -98,7 +98,7 @@ export const CharityList: React.FC<CharityListProps> = ({
                                 </button>
                                 <button
                                     type="button"
-                                    className="cursor-pointer p-2 rounded-md hover:text-gray-700 hover:bg-gray-50 transition-colors duration-200"
+                                    className="cursor-pointer p-2 rounded-md  hover:bg-gray-50 transition-colors duration-200"
                                     onClick={() => handleEditCharity(charity)}
                                 >
                                     <PencilIcon

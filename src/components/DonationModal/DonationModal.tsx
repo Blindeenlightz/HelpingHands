@@ -3,13 +3,13 @@ import { DonationModalProps, DonationValues } from "./DonationModal.types";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { FormEvent } from "react";
 import { NameInput } from "../Inputs/NameInput/NameInput";
-import { AmountInput } from "../Inputs/AmountInput/AmountInput";
-import { RecurringSelection } from "../RecurringSelection/RecurringSelection";
+import { FrequencyInput } from "../FrequencyInput/FrequencyInput";
 import { PaymentMethods } from "../PaymentMethods/PaymentMethods";
 import { useForm } from "@/utils/CommonHooks";
 import { Frequency } from "@/enums/Frequency";
 import { Donation } from "@/types/Donation";
 import { parseCurrency, formatCurrency } from "@/utils/CharityUtils";
+import { DollarInput } from "../Inputs/DollarInput/DollarInput";
 
 export const DonationModal: React.FC<DonationModalProps> = ({
     open,
@@ -64,19 +64,19 @@ export const DonationModal: React.FC<DonationModalProps> = ({
         <Dialog
             open={open}
             onClose={handleModalClose}
-            className="fixed inset-0 z-50"
+            className="fixed inset-0 z-50 backdrop-blur-sm"
         >
             <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
 
             <div className="fixed inset-0 flex items-center justify-center p-4">
-                <DialogPanel className="mx-auto max-w-md rounded bg-white p-6 shadow-lg">
+                <DialogPanel className="mx-auto max-w-md rounded bg-[var(--color-cardBackground)] p-6 shadow-lg">
                     <div className="flex items-center justify-between">
-                        <DialogTitle className="text-lg font-medium text-gray-900">
+                        <DialogTitle className="text-lg font-medium">
                             {charityName}
                         </DialogTitle>
                         <button
                             onClick={handleModalClose}
-                            className="cursor-pointer rounded p-1 text-gray-600 hover:text-gray-700"
+                            className="cursor-pointer rounded p-1"
                         >
                             <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                         </button>
@@ -88,12 +88,12 @@ export const DonationModal: React.FC<DonationModalProps> = ({
                             value={form.name}
                             onChange={handleChange}
                         />
-                        <AmountInput
+                        <DollarInput
                             name="amount"
                             value={form.amount}
                             onChange={handleChange}
                         />
-                        <RecurringSelection
+                        <FrequencyInput
                             value={form.frequency}
                             onChange={(freq: Frequency) =>
                                 setForm((f) => ({ ...f, frequency: freq }))

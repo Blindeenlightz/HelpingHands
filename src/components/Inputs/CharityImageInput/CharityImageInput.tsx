@@ -24,7 +24,7 @@ export function CharityImageInput({
         <div className="col-span-full mt-2">
             <label
                 htmlFor={name}
-                className="block text-sm/6 font-medium text-gray-900"
+                className="block text-sm/6 font-medium"
             >
                 Charity Image
             </label>
@@ -34,7 +34,7 @@ export function CharityImageInput({
                     {previewSrc === undefined ? (
                         <PhotoIcon
                             aria-hidden="true"
-                            className="mx-auto size-12 text-gray-300"
+                            className="mx-auto size-12"
                         />
                     ) : (
                         <div className="relative w-full aspect-square">
@@ -50,10 +50,10 @@ export function CharityImageInput({
                             />
                         </div>
                     )}
-                    <div className="mt-4 flex text-sm/6 text-gray-600">
+                    <div className="mt-4 flex text-sm/6">
                         <label
                             htmlFor={name}
-                            className="relative cursor-pointer rounded-md bg-white font-semibold text-rose-600  hover:text-rose-500"
+                            className="relative cursor-pointer rounded-md font-semibold text-rose-600  hover:text-rose-500"
                         >
                             {previewSrc === undefined ? (
                                 <span>Upload File</span>
@@ -72,7 +72,7 @@ export function CharityImageInput({
                         </label>
                         <p className="pl-1">or drag and drop</p>
                     </div>
-                    <p className="text-xs/5 text-gray-600">
+                    <p className="text-xs/5">
                         PNG, JPG, GIF up to 10MB
                     </p>
                 </div>

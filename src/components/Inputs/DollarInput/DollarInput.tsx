@@ -1,45 +1,39 @@
 import React from "react";
+import { DollarInputProps } from "./DollarInput.types";
 
-export interface DollarInputProps {
-    name: string;
-    value: string;
-    onChange: React.ChangeEventHandler<HTMLInputElement>;
-    label?: string;
-    placeholder?: string;
-}
-
-/**
- * A controlled dollar-amount input with a leading '$' prefix.
- * Supports comma separators and up to two decimals.
- * Pattern allows optional leading '$'.
- */
 export const DollarInput: React.FC<DollarInputProps> = ({
     name,
     value,
     onChange,
     label = "Amount",
     placeholder = "0.00",
+    currency = "USD",
 }) => (
-    <div className="flex flex-col">
-        <label
-            htmlFor={name}
-            className="mb-1 text-sm font-medium text-gray-900"
-        >
+    <div>
+        <label htmlFor={name} className="mb-2 text-sm font-medium">
             {label}
         </label>
-        <div className="relative">
-            <input
-                id={name}
-                name={name}
-                type="text"
-                inputMode="decimal"
-                pattern="^\\$?\\d{1,3}(?:,\\d{3})*(?:\\.\\d{0,2})?$"
-                value={value}
-                onChange={onChange}
-                placeholder={placeholder}
-                className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-rose-600 sm:text-sm/6"
-                required
-            />
+        <div className="mt-2">
+            <div className="flex items-center rounded-md px-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-rose-600">
+                <input
+                    id={name}
+                    name={name}
+                    type="text"
+                    inputMode="decimal"
+                    pattern="^\\$?\\d{1,3}(?:,\\d{3})*(?:\\.\\d{0,2})?$"
+                    value={value}
+                    onChange={onChange}
+                    placeholder={placeholder}
+                    className="block min-w-0 grow py-1.5 pr-3 pl-1 text-base focus:outline-none sm:text-sm/6"
+                    required
+                />
+                <div
+                    id="price-currency"
+                    className="shrink-0 text-base select-none sm:text-sm/6"
+                >
+                    {currency}
+                </div>
+            </div>
         </div>
     </div>
 );
