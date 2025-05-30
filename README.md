@@ -70,11 +70,9 @@ Dark/light mode can be toggled in the UI.
 
 ## 📸 Screenshots
 
-*(Optional — add screenshots to `public/screenshots` and link here)*
-
 ```
-mdCopyEdit![Landing Page](./public/screenshots/landing.png)
-![Dark Mode](./public/screenshots/darkmode.png)
+![Landing Page](./screenshots/LightModeScreenshot.png)
+![Dark Mode](./screenshots/DarkModeScreenhot.png)
 ```
 
 ------
