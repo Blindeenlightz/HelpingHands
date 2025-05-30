@@ -73,7 +73,7 @@ Dark/light mode can be toggled in the UI.
 
 ![Landing Page](./screenshots/LightModeScreenshot.png)
 
-![Dark Mode](./screenshots/DarkModeScreenhot.png)
+![Dark Mode](./screenshots/DarkModeScreenshot.png)
 
 
 ------
