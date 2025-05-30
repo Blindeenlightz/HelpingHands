@@ -1,1 +1,93 @@
+# Helping Hands 🖐️
 
+**Helping Hands** is a responsive, interactive landing page application for a fictional charity gallery. Built with **Next.js** and **TypeScript**, it allows users to browse and manage charities, make donations, and view live donor progress per charity.
+
+This project showcases reusable component architecture, responsive design, local data persistence, and dark/light theme support. Ideal for recruiters and clients looking to see practical, clean, modern React-based development.
+
+[🌐 Live Demo](https://your-demo-link.com)
+
+------
+
+## ✨ Features
+
+- Add, edit, and delete charities
+- Donate to individual charities
+- View donation progress with animated progress bars
+- View donor history per charity
+- Fully responsive design across devices
+- Dark and light mode toggle
+- Modular, reusable React component design using Tailwind CSS
+
+------
+
+## 🧑‍💻 Tech Stack
+
+- **Framework**: [Next.js](https://nextjs.org/) with [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **State Management**: React `useState`/`useEffect` + `local`
+- **Deployment**: [Vercel](https://vercel.com/) *(placeholder link for now)*
+
+------
+
+## 📁 Project Structure
+
+```
+src/
+├── app/                # App Router structure (layout.tsx, page.tsx, etc.)
+├── components/         # Reusable UI components (buttons, modals, cards, etc.)
+├── styles/             # Tailwind config and global styles
+├── types/              # TypeScript interfaces and type definitions
+├── utils/              # Utility functions (e.g. localStorage helpers)
+```
+
+------
+
+## 🚀 Getting Started
+
+```
+bashCopyEdit# Clone the repo
+git clone https://github.com/your-username/helping-hands.git
+cd helping-hands
+
+# Install dependencies
+npm install
+
+# Run in development
+npm run dev
+
+# Build for production
+npm run build
+npm start
+```
+
+------
+
+## 🌙 Dark Mode
+
+Dark/light mode can be toggled in the UI.
+
+------
+
+## 📸 Screenshots
+
+*(Optional — add screenshots to `public/screenshots` and link here)*
+
+```
+mdCopyEdit![Landing Page](./public/screenshots/landing.png)
+![Dark Mode](./public/screenshots/darkmode.png)
+```
+
+------
+
+## 🧠 Design Philosophy
+
+- Emphasize reusable, composable components
+- Responsive-first UI with Tailwind CSS utilities
+- Clear state updates and user feedback for donations
+
+------
+
+## 📬 Contact
+
+Created by [Jamie Braaksma](https://jamiebraaksma.dev)
+ Feel free to reach out on [LinkedIn](https://www.linkedin.com/in/jamie-braaksma-b32273223) or explore more on [GitHub](https://github.com/Blindeenlightz)
