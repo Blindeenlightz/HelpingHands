@@ -1,8 +1,22 @@
-import { DollarInputProps } from "./DollarInput.types";
+import React from "react";
+
+export interface DollarInputProps {
+    /** Field name and id */
+    name: string;
+    /** Controlled input value (with or without leading '$' and commas) */
+    value: string;
+    /** Change handler from parent form */
+    onChange: React.ChangeEventHandler<HTMLInputElement>;
+    /** Optional label text */
+    label?: string;
+    /** Optional placeholder (e.g. "0.00") */
+    placeholder?: string;
+}
 
 /**
  * A controlled dollar-amount input with a leading '$' prefix.
- * Uses inputMode="decimal" and a simple regex pattern to allow up to two decimals.
+ * Supports comma separators and up to two decimals.
+ * Pattern allows optional leading '$'.
  */
 export const DollarInput: React.FC<DollarInputProps> = ({
     name,
@@ -11,20 +25,20 @@ export const DollarInput: React.FC<DollarInputProps> = ({
     label = "Amount",
     placeholder = "0.00",
 }) => (
-    <div>
+    <div className="flex flex-col">
         <label
             htmlFor={name}
-            className="block text-sm/6 font-medium text-gray-900"
+            className="mb-1 text-sm font-medium text-gray-900"
         >
             {label}
         </label>
-        <div className="mt-2">
+        <div className="relative">
             <input
                 id={name}
                 name={name}
                 type="text"
                 inputMode="decimal"
-                pattern="^\\d*(\\.\\d{0,2})?$"
+                pattern="^\\$?\\d{1,3}(?:,\\d{3})*(?:\\.\\d{0,2})?$"
                 value={value}
                 onChange={onChange}
                 placeholder={placeholder}

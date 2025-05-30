@@ -37,6 +37,8 @@ export function CharityImagePicker({
                         fill
                         sizes="(max-width: 640px) 100vw, 256px"
                         className="object-cover rounded-lg"
+                        unoptimized
+                        loader={({ src }) => src}
                         key={previewSrc} // ensure Next/Image updates on change
                     />
                 </div>
