@@ -53,7 +53,7 @@ export function CharityImageInput({
                     <div className="mt-4 flex text-sm/6 text-gray-600">
                         <label
                             htmlFor={name}
-                            className="relative cursor-pointer rounded-md bg-white font-semibold text-rose-600 focus-within:ring-2 focus-within:ring-rose-600 focus-within:ring-offset-2 focus-within:outline-hidden hover:text-rose-500"
+                            className="relative cursor-pointer rounded-md bg-white font-semibold text-rose-600  hover:text-rose-500"
                         >
                             {previewSrc === undefined ? (
                                 <span>Upload File</span>

@@ -22,7 +22,7 @@ export const NavBar: React.FC<NavBarProps> = ({ charities, setCharities }) => {
                         <a href="#" className="-m-1.5 p-1.5">
                             <span className="sr-only">Helping Hands</span>
                             <Image
-                                src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=rose&shade=600"
+                                src="/world_hands_icon.png"
                                 alt="Helping Hands logo"
                                 width={32}
                                 height={32}

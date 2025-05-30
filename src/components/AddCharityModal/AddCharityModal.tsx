@@ -203,7 +203,7 @@ export const AddCharityModal: React.FC<AddCharityModalProps> = ({
                         </button>
                         <button
                             type="submit"
-                            className="cursor-pointer px-4 py-2 rounded-lg text-sm font-medium bg-rose-500 hover:bg-rose-600 text-white transition-all duration-200 shadow-sm hover:shadow-md transform hover:-translate-y-px focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 focus:ring-offset-white"
+                            className="cursor-pointer px-4 py-2 rounded-lg text-sm font-medium bg-rose-500 hover:bg-rose-600 text-white transition-all duration-200 shadow-sm hover:shadow-md transform hover:-translate-y-px "
                         >
                             Create
                         </button>
